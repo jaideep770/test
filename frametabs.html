@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+  <script >
+var block = false;
+
+document.onclick = function () {
+	resetTimer();
+};
+
+
+localStorage.setItem("lastActiveTime", new Date().getTime());
+
+
+function resetTimer() {
+	localStorage.setItem("lastActiveTime", new Date().getTime());
+	console.log ("lastActiveTime reset");
+}
+
+setInterval(CheckIdleTime, 1000);
+
+
+function CheckIdleTime() {
+    var lastActiveTime = localStorage.getItem("lastActiveTime");
+	console.log ("lastActiveTime:"+lastActiveTime);
+		console.log ("lastActiveTime+45 mins:"+(parseInt(lastActiveTime)+(1000*30)));
+		console.log ("Current time :"+new Date().getTime());
+	if ( (parseInt(lastActiveTime)+(1000*5)) < new Date().getTime()) {
+		
+		
+		refreshCsrSession ();
+		localStorage.setItem("lastActiveTime", new Date().getTime());
+	}
+}
+
+
+
+
+function refreshCsrSession(){
+
+
+
+confirm ("press a button");
+	console.log ("Time to reset");
+}
+
+window.confirm = function (contentMsg) 
+{ 
+	console.log ("Inside");
+  $.html().confirm({
+    title: 'Confirm!',
+    content: contentMsg,
+    buttons: {
+        confirm: function () {
+            alert("SS");
+        },
+        cancel: function () {
+            alert("Test");
+        }
+    }
+});
+};
+
+</script>
+
+
+<frameset cols="25%,*,25%">
+
+ <frame id="test1" name="test1" src="test.html">
+  <frame id="test2" name="test2" src="test2.html">
+</frameset>
+</html>
